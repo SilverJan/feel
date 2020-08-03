@@ -7,4 +7,6 @@ class Config {
   static const UnderlineInputBorder BORDER = UnderlineInputBorder(
     borderSide: BorderSide(color: PRIMARY_COLOR),
   );
+  static const EdgeInsets CARD_MARGIN =
+      EdgeInsets.symmetric(horizontal: 15, vertical: 5);
 }

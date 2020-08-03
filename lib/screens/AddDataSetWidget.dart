@@ -1,6 +1,9 @@
-import 'package:feel/common/Enums.dart';
+import 'package:feel/common/Config.dart';
+import 'package:feel/models/DataSetItem.dart';
+import 'package:feel/models/DataSetModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class AddDataSetWidget extends StatefulWidget {
   @override
@@ -9,155 +12,296 @@ class AddDataSetWidget extends StatefulWidget {
 
 class _AddDataSetWidgetState extends State<AddDataSetWidget> {
   final _formKey = GlobalKey<FormState>();
+  double _overallValue = 0;
   double _dizzinessValue = 0;
   double _headacheValue = 0;
   double _heartbeatValue = 0;
+  double _breathingIssuesValue = 0;
 
-  bool isSelectedElevator = false;
-  bool isSelectedWasher = false;
-  bool isSelectedFireplace = false;
+  final List<String> _activities = [
+    'Gym',
+    'Walk',
+    'Run',
+    'Relax',
+    'Sleep',
+    'Code',
+    'Work',
+    'Eat/Drink'
+  ];
+  List<bool> _activitySelected;
+
+  double _sliderMin = 0;
+  double _sliderMax = 5;
+  int _sliderDivisions = 10;
+
+  @override
+  void initState() {
+    // generate list dynamically depending on amount of activities available
+    _activitySelected =
+        List<bool>.generate(_activities.length, (index) => false);
+    super.initState();
+  }
+
+  void resetForm() {
+    setState(() {
+      _overallValue = 0;
+      _dizzinessValue = 0;
+      _headacheValue = 0;
+      _heartbeatValue = 0;
+      _breathingIssuesValue = 0;
+      //FIXME this doesnt work
+      _activitySelected.forEach((element) {
+        element = true;
+      });
+    });
+  }
+
+  List<Widget> _buildChips() {
+    List<Widget> chips = new List();
+    for (int i = 0; i < _activities.length; i++) {
+      chips.add(FilterChip(
+        selected: _activitySelected[i],
+        // avatar: Icon(Icons.border_all),
+        label: Text(_activities[i], style: TextStyle(color: Colors.white)),
+        onSelected: (bool selected) {
+          setState(() {
+            _activitySelected[i] = selected;
+          });
+        },
+      ));
+    }
+    return chips;
+  }
+
+  List<String> _getSelectedActivities() {
+    List<String> selectedActivities = [];
+    _activities.asMap().forEach((i, activity) {
+      if (_activitySelected[i]) {
+        selectedActivities.add(activity);
+      }
+    });
+    return selectedActivities;
+  }
+
+  SliderThemeData getSliderThemeData(double value) {
+    return SliderThemeData(
+        activeTrackColor: (value < 1.66)
+            ? Colors.green
+            : (value < 3.33) ? Colors.orange : Colors.red);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final chips = [
-      FilterChip(
-        label: Text("Bla"),
-        selected: isSelectedElevator,
-        onSelected: (value) {
-          setState(() {
-            isSelectedElevator = !isSelectedElevator;
-          });
-        },
-      ),
-      FilterChip(
-        label: Text("Blu"),
-        selected: isSelectedWasher,
-        onSelected: (value) {
-          setState(() {
-            isSelectedWasher = !isSelectedWasher;
-          });
-        },
-      ),
-      FilterChip(
-        label: Text("blo"),
-        selected: isSelectedFireplace,
-        onSelected: (value) {
-          setState(() {
-            isSelectedFireplace = !isSelectedFireplace;
-          });
-        },
-      ),
-    ];
+    final _dataSets = Provider.of<DataSetModel>(context);
+    final _theme = Theme.of(context);
 
-    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      Card(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: ListTile(
-          tileColor: Colors.blueGrey,
-          title: Text(
-            "Submit a new data set",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          subtitle: Text(
-              "Try to fill in the questions based on the past 30 minutes to 1 hour."),
-        ),
-      ),
-      Card(
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                    ),
-                    Text(
-                      "Which activities have you done in the past minutes?",
-                    ),
-                    // Wrap(children: [
-                    //   for (final chip in chips)
-                    //     Padding(
-                    //       padding: const EdgeInsets.all(4),
-                    //       child: chip,
-                    //     )
-                    // ]),
-                    SizedBox(
-                        width: 300,
-                        height: 200,
-                        child: GridView.builder(
-                          itemCount: Activities.ACTIVITIES.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                                color: Colors.black12,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(Activities
-                                        .ACTIVITIES[index].keys.first),
-                                    Icon(
-                                      Activities.ACTIVITIES[index].values.first,
-                                      size: 40,
-                                    )
-                                  ],
-                                ));
-                          },
-                        )),
-                    Divider(),
-                    Text(
-                      "Do you feel dizzy? (0 = not at all, 5 = very much)",
-                    ),
-                    Slider(
-                        onChanged: (value) {
-                          setState(() {
-                            _dizzinessValue = value;
-                          });
-                        },
-                        min: 0,
-                        max: 5,
-                        divisions: 5,
-                        value: _dizzinessValue,
-                        label: _dizzinessValue.toString()),
-                    Divider(),
-                    Text(
-                      "Do you have headache? (0 = not at all, 5 = very much)",
-                    ),
-                    Slider(
-                        onChanged: (value) {
-                          setState(() {
-                            _headacheValue = value;
-                          });
-                        },
-                        min: 0,
-                        max: 5,
-                        divisions: 5,
-                        value: _headacheValue,
-                        label: _headacheValue.toString()),
-                    Divider(),
-                    Text(
-                      "Do you have a fast heartbeat? (0 = not at all, 5 = very much)",
-                    ),
-                    Slider(
-                        onChanged: (value) {
-                          setState(() {
-                            _heartbeatValue = value;
-                          });
-                        },
-                        min: 0,
-                        max: 5,
-                        divisions: 5,
-                        value: _heartbeatValue,
-                        label: _heartbeatValue.toString())
-                  ]),
-            ),
-          ))
-    ]);
+    return Scaffold(
+        floatingActionButton: new FloatingActionButton(
+            child: Icon(Icons.add),
+            // tooltip: "Submit",
+            backgroundColor: _theme.buttonColor,
+            onPressed: () {
+              _dataSets.addDataSet(new DataSetItem(
+                  DateTime.now(),
+                  _overallValue,
+                  _headacheValue,
+                  _dizzinessValue,
+                  _headacheValue,
+                  _breathingIssuesValue,
+                  _getSelectedActivities()));
+              resetForm();
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text("Data set successfully added!"),
+                duration: Duration(
+                  milliseconds: 1000,
+                ),
+                behavior: SnackBarBehavior.floating,
+              ));
+            }),
+        body: Center(
+            child: SingleChildScrollView(
+                padding: EdgeInsets.only(top: 30),
+                child:
+                    // Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+                    //     Widget>[
+                    // Card(
+                    //   margin: EdgeInsets.symmetric(horizontal: 15),
+                    //   child: ListTile(
+                    //     tileColor: Theme.of(context).secondaryHeaderColor,
+                    //     title: Text(
+                    //       "Submit a new data set",
+                    //       style: TextStyle(color: Colors.white, fontSize: 20),
+                    //     ),
+                    //     subtitle: Text(
+                    //         "Try to fill in the questions based on the past 30-60 minutes."),
+                    //   ),
+                    // ),
+                    Card(
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          ListTile(
+                            tileColor: Theme.of(context).secondaryHeaderColor,
+                            title: Text(
+                              "Submit a new data set",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            subtitle: Text(
+                                "Try to fill in the questions based on the past 30-60 minutes."),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
+                                    ),
+                                    Text(
+                                      "Which activities have you done in the past minutes?",
+                                    ),
+                                    Wrap(children: [
+                                      for (FilterChip chip in _buildChips())
+                                        Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child: chip)
+                                    ]),
+                                    // ListTile(
+                                    //   tileColor: Theme.of(context).primaryColor,
+                                    //   title: Text(
+                                    //     "Health check",
+                                    //     style: TextStyle(
+                                    //         color: Colors.white, fontSize: 17),
+                                    //   ),
+                                    //   subtitle: Text(
+                                    //       "Select a value for the individual question (0 = Not applicable; 5 = Very much)"),
+                                    // ),
+                                    // Padding(
+                                    //   padding: EdgeInsets.symmetric(vertical: 10),
+                                    // ),
+                                    // Divider(),
+                                    // Text(
+                                    //   "Select a value for the individual question.\n\n0 = Not applicable; 5 = Very much",
+                                    //   textAlign: TextAlign.center,
+                                    // ),
+                                    Divider(),
+                                    Text(
+                                      "How good is your overall health situation?",
+                                    ),
+                                    SliderTheme(
+                                        data: getSliderThemeData(_overallValue),
+                                        child: Slider(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _overallValue = value;
+                                              });
+                                            },
+                                            min: _sliderMin,
+                                            max: _sliderMax,
+                                            divisions: _sliderDivisions,
+                                            value: _overallValue,
+                                            label: _overallValue.toString())),
+                                    Divider(),
+                                    Text(
+                                      "Do you feel dizzy?",
+                                    ),
+                                    SliderTheme(
+                                        data:
+                                            getSliderThemeData(_dizzinessValue),
+                                        child: Slider(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _dizzinessValue = value;
+                                              });
+                                            },
+                                            min: _sliderMin,
+                                            max: _sliderMax,
+                                            divisions: _sliderDivisions,
+                                            value: _dizzinessValue,
+                                            label: _dizzinessValue.toString())),
+                                    Divider(),
+                                    Text(
+                                      "Do you have headache?",
+                                    ),
+                                    SliderTheme(
+                                        data:
+                                            getSliderThemeData(_headacheValue),
+                                        child: Slider(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _headacheValue = value;
+                                              });
+                                            },
+                                            min: _sliderMin,
+                                            max: _sliderMax,
+                                            divisions: _sliderDivisions,
+                                            value: _headacheValue,
+                                            label: _headacheValue.toString())),
+                                    Divider(),
+                                    Text(
+                                      "Do you have a fast heartbeat?",
+                                    ),
+                                    SliderTheme(
+                                        data:
+                                            getSliderThemeData(_heartbeatValue),
+                                        child: Slider(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _heartbeatValue = value;
+                                              });
+                                            },
+                                            min: _sliderMin,
+                                            max: _sliderMax,
+                                            divisions: _sliderDivisions,
+                                            value: _heartbeatValue,
+                                            label: _heartbeatValue.toString())),
+                                    Divider(),
+                                    Text(
+                                      "Do you have issues breathing?",
+                                    ),
+                                    SliderTheme(
+                                        data: getSliderThemeData(
+                                            _breathingIssuesValue),
+                                        child: Slider(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _breathingIssuesValue = value;
+                                              });
+                                            },
+                                            min: _sliderMin,
+                                            max: _sliderMax,
+                                            divisions: _sliderDivisions,
+                                            value: _breathingIssuesValue,
+                                            label: _breathingIssuesValue
+                                                .toString())),
+                                    // Divider(),
+                                    // RaisedButton(
+                                    //   // color: _theme.buttonTheme.colorScheme.primary,
+                                    //   child: Text("Submit"),
+                                    //   onPressed: () {
+                                    //     _dataSets.addDataSet(new DataSetItem(
+                                    //         DateTime.now(),
+                                    //         _overallValue,
+                                    //         _headacheValue,
+                                    //         _dizzinessValue,
+                                    //         _headacheValue,
+                                    //         _breathingIssuesValue,
+                                    //         _getSelectedActivities()));
+                                    //     resetForm();
+                                    //     Scaffold.of(context).showSnackBar(SnackBar(
+                                    //       content: Text("Data set successfully added!"),
+                                    //       duration: Duration(milliseconds: 1000),
+                                    //     ));
+                                    //   },
+                                    // )
+                                  ]),
+                            ),
+                          )
+                        ])))));
   }
 }
