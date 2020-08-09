@@ -1,3 +1,4 @@
+import 'package:feel/common/Common.dart';
 import 'package:feel/models/DataSetItem.dart';
 import 'package:feel/models/DataSetModel.dart';
 import 'package:flutter/material.dart';
@@ -71,9 +72,9 @@ class _RawDataTableState extends State<RawDataTable> {
           for (DataSetItem dataSet in _dataSets.dataSets)
             DataRow(
               cells: <DataCell>[
-                DataCell(Text(DateFormat.yMd().add_Hm().format(dataSet.time))),
+                DataCell(Text(formatDateTime(dataSet.time))),
                 DataCell(Text(dataSet.overall.toString())),
-                DataCell(Text(dataSet.headache.toString())),
+                DataCell(Text(dataSet.coughing.toString())),
                 DataCell(Text(dataSet.dizziness.toString())),
                 DataCell(Text(dataSet.heartbeat.toString())),
                 DataCell(Text(dataSet.breathingIssues.toString())),

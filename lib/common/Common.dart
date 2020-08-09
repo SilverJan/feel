@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 SeriesLegend getLegend(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
@@ -22,4 +23,8 @@ SeriesLegend getLegend(BuildContext context) {
   return SeriesLegend(
       desiredMaxColumns: maxColumns,
       outsideJustification: outsideJustification);
+}
+
+String formatDateTime(DateTime dateTime) {
+  return DateFormat.yMd().add_Hm().add_EEEE().format(dateTime);
 }

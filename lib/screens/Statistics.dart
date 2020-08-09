@@ -1,4 +1,6 @@
 import 'package:feel/models/DataSetItem.dart';
+import 'package:feel/models/DataSetModel.dart';
+import 'package:feel/screens/charts/ActivityCorrelationChart.dart';
 import 'package:feel/screens/charts/AverageChart.dart';
 import 'package:feel/screens/charts/EvenLineChart.dart';
 import 'package:feel/screens/charts/HistoricalLineChart.dart';
@@ -83,39 +85,50 @@ class _RawStatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     dataSetItemProperties = Provider.of<DataSetItemProperties>(context);
+    final _dataSets = Provider.of<DataSetModel>(context);
 
     return Scaffold(
         floatingActionButton: buildSpeedDial(),
-        body: Column(children: [
-          Expanded(
-              child: ListView(children: [
-            StatisticsCard(
-              title: "Average Overall Values",
-              chart: AverageChart(),
-              rightInfo: "30d",
-              subTitle:
-                  "Showing the average rating for the different properties that were analyzed",
-            ),
-            StatisticsCard(
-              title: "Historical data (even)",
-              chart: EvenLineChart(),
-              // rightInfo: "30d",
-              subTitle: "This chart shows the historical data of all values",
-            ),
-            StatisticsCard(
-              title: "Historical data (uneven)",
-              chart: HistoricalLineChart(),
-              // rightInfo: "30d",
-              subTitle: "This chart shows the historical data of all values",
-            ),
-            StatisticsCard(
-              title: "Average Overall Values",
-              chart: TodayLineChart(),
-              // rightInfo: "30d",
-              subTitle: "This chart shows today's data",
-            )
-          ]))
-        ]));
+        body: _dataSets.dataSets.length > 4
+            ? Column(children: [
+                Expanded(
+                    child: ListView(children: [
+                  StatisticsCard(
+                    title: "Average Health Values",
+                    chart: AverageChart(),
+                    // rightInfo: "30d",
+                    subTitle:
+                        "Showing the average rating for the different properties that were analyzed",
+                  ),
+                  StatisticsCard(
+                    title: "Correlation Activity <-> Overall Health",
+                    chart: ActivityCorrelationChart(),
+                    subTitle:
+                        "Here you can see which activity had which impact on your overall health",
+                    height: 330,
+                  ),
+                  StatisticsCard(
+                    title: "Historical Data (even)",
+                    chart: EvenLineChart(),
+                    subTitle:
+                        "This chart shows the historical data of all values",
+                  ),
+                  StatisticsCard(
+                    title: "Historical Data (time-based)",
+                    chart: HistoricalLineChart(),
+                    subTitle:
+                        "This chart shows the historical data of all values",
+                  ),
+                  StatisticsCard(
+                    title: "Today's Data",
+                    chart: TodayLineChart(),
+                    subTitle: "This chart shows today's data",
+                  )
+                ]))
+              ])
+            : Center(
+                child: Text(
+                    "Not enough data available yet. Create at least 5 data sets to show statistics!")));
   }
 }
 
@@ -125,20 +138,22 @@ class StatisticsCard extends StatelessWidget {
       @required this.chart,
       @required this.title,
       this.subTitle,
-      this.rightInfo = ""})
+      this.rightInfo = "",
+      this.height = 400})
       : super(key: key);
 
   final Widget chart;
   final String title;
   final String subTitle; //TODO: Make subtitle child dynamic if empty or not
   final String rightInfo;
+  final double height;
 
   static const EdgeInsets marginLinux = EdgeInsets.all(10);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 400,
+        height: height,
         child: Card(
             // color: Colors.white,
             margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
