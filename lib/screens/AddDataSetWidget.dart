@@ -1,4 +1,3 @@
-import 'package:feel/common/Config.dart';
 import 'package:feel/models/DataSetItem.dart';
 import 'package:feel/models/DataSetModel.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
   double _headacheValue = 0;
   double _heartbeatValue = 0;
   double _breathingIssuesValue = 0;
+  double _stressValue = 0;
 
   final List<String> _activities = [
     'Gym',
@@ -24,9 +24,13 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
     'Run',
     'Relax',
     'Sleep',
+    'Use phone',
     'Code',
     'Work',
-    'Eat/Drink'
+    'Eat/Drink',
+    'Socialize',
+    'Shopping',
+    'Listen to music'
   ];
   List<bool> _activitySelected;
 
@@ -36,10 +40,14 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
 
   @override
   void initState() {
-    // generate list dynamically depending on amount of activities available
+    resetSelectedActivities();
+    super.initState();
+  }
+
+  /// Generate list dynamically depending on amount of activities available
+  void resetSelectedActivities() {
     _activitySelected =
         List<bool>.generate(_activities.length, (index) => false);
-    super.initState();
   }
 
   void resetForm() {
@@ -49,10 +57,8 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
       _headacheValue = 0;
       _heartbeatValue = 0;
       _breathingIssuesValue = 0;
-      //FIXME this doesnt work
-      _activitySelected.forEach((element) {
-        element = true;
-      });
+      _stressValue = 0;
+      resetSelectedActivities();
     });
   }
 
@@ -108,6 +114,7 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
                   _dizzinessValue,
                   _headacheValue,
                   _breathingIssuesValue,
+                  _stressValue,
                   _getSelectedActivities()));
               resetForm();
               Scaffold.of(context).showSnackBar(SnackBar(
@@ -226,7 +233,7 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
                                             label: _dizzinessValue.toString())),
                                     Divider(),
                                     Text(
-                                      "Do you have headache?",
+                                      "Do you have to cough / feel need to cough?",
                                     ),
                                     SliderTheme(
                                         data:
@@ -279,6 +286,23 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
                                             value: _breathingIssuesValue,
                                             label: _breathingIssuesValue
                                                 .toString())),
+                                    Divider(),
+                                    Text(
+                                      "Do you feel stressed?",
+                                    ),
+                                    SliderTheme(
+                                        data: getSliderThemeData(_stressValue),
+                                        child: Slider(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _stressValue = value;
+                                              });
+                                            },
+                                            min: _sliderMin,
+                                            max: _sliderMax,
+                                            divisions: _sliderDivisions,
+                                            value: _stressValue,
+                                            label: _stressValue.toString())),
                                     // Divider(),
                                     // RaisedButton(
                                     //   // color: _theme.buttonTheme.colorScheme.primary,

@@ -5,15 +5,15 @@ class DataSetItem extends Comparable {
   final String id;
   DateTime time;
   double overall;
-  // double happiness;
-  double headache;
+  double coughing;
   double dizziness;
   double heartbeat;
   double breathingIssues;
+  double stress;
   List<String> activities;
 
-  DataSetItem(this.time, this.overall, this.headache, this.dizziness,
-      this.heartbeat, this.breathingIssues, this.activities)
+  DataSetItem(this.time, this.overall, this.coughing, this.dizziness,
+      this.heartbeat, this.breathingIssues, this.stress, this.activities)
       : id = Uuid().v1();
 
   @override
@@ -29,12 +29,13 @@ class DataSetItem extends Comparable {
 
   DataSetItem.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        time = DateTime.parse(json['time']),
-        overall = double.parse(json['overall'].toString()),
-        headache = double.parse(json['headache'].toString()),
-        dizziness = double.parse(json['dizziness'].toString()),
-        heartbeat = double.parse(json['heartbeat'].toString()),
-        breathingIssues = double.parse(json['breathingIssues'].toString()) {
+        time = DateTime.tryParse(json['time']),
+        overall = double.tryParse(json['overall'].toString()),
+        coughing = double.tryParse(json['coughing'].toString()),
+        dizziness = double.tryParse(json['dizziness'].toString()),
+        heartbeat = double.tryParse(json['heartbeat'].toString()),
+        breathingIssues = double.tryParse(json['breathingIssues'].toString()),
+        stress = double.tryParse(json['stress'].toString()) {
     activities = List<String>.from(json['activities']);
     // activities = List.castFrom<dynamic, String>(json['activities']);
   }
@@ -43,12 +44,20 @@ class DataSetItem extends Comparable {
         'id': id,
         'time': time.toIso8601String(),
         'overall': overall,
-        'headache': headache,
+        'coughing': coughing,
         'dizziness': dizziness,
         'heartbeat': heartbeat,
         'breathingIssues': breathingIssues,
+        'stress': stress,
         'activities': activities
       };
+
+  @override
+  String toString() {
+    return """Overall: $overall 
+Coughing: $coughing | Dizziness: $dizziness | Heartbeat: $heartbeat | Breathing issues: $breathingIssues | Stress: $stress
+Activities: $activities""";
+  }
 }
 
 class DataSetItemProperties {
@@ -60,13 +69,15 @@ class DataSetItemProperties {
       DataSetItemProperty(
           "overall", "Overall", MaterialPalette.blue.shadeDefault),
       DataSetItemProperty(
-          "headache", "Headache", MaterialPalette.red.shadeDefault),
+          "coughing", "Coughing", MaterialPalette.red.shadeDefault),
       DataSetItemProperty(
           "dizziness", "Dizziness", MaterialPalette.green.shadeDefault),
       DataSetItemProperty(
           "heartbeat", "Fast heartbeat", MaterialPalette.purple.shadeDefault),
       DataSetItemProperty("breathingIssues", "Breathing issues",
           MaterialPalette.yellow.shadeDefault.darker.darker),
+      DataSetItemProperty(
+          "stress", "Stress level", MaterialPalette.pink.shadeDefault),
     ];
   }
 

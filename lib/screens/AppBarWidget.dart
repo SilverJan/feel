@@ -19,7 +19,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     AddDataSetWidget(),
     Statistics(),
     DataView(),
-    SettingsWidget()
+    // SettingsWidget()
   ];
 
   void _onItemTapped(int index) {
@@ -54,10 +54,10 @@ class _AppBarWidgetState extends State<AppBarWidget> {
             icon: Icon(Icons.table_chart),
             title: Text('Raw data'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Settings'),
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.settings),
+          //   title: Text('Settings'),
+          // ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

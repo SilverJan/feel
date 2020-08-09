@@ -31,7 +31,8 @@ class FileAccess {
       return dataSetItemList;
     } catch (e) {
       // If encountering an error, return empty array
-      print("An error occured! " + e.toString());
+      print("An error occured while reading data sets from json file! " +
+          e.toString());
       return [];
     }
   }

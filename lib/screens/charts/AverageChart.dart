@@ -114,7 +114,11 @@ class AverageValue {
     this.color = color;
     double value = 0;
     dataSets.forEach((DataSetItem dataSet) {
-      value += dataSet.toJson()[property.name];
+      try {
+        value += dataSet.toJson()[property.name];
+      } catch (e) {
+        value += 0;
+      }
     });
     this.value = value / dataSets.length;
   }
