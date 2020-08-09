@@ -101,7 +101,7 @@ class _RawStatisticsState extends State<Statistics> {
                         "Showing the average rating for the different properties that were analyzed",
                   ),
                   StatisticsCard(
-                    title: "Correlation Activity <-> Overall Health",
+                    title: "Impact Activity <-> Overall Health",
                     chart: ActivityCorrelationChart(),
                     subTitle:
                         "Here you can see which activity had which impact on your overall health",
@@ -128,7 +128,9 @@ class _RawStatisticsState extends State<Statistics> {
               ])
             : Center(
                 child: Text(
-                    "Not enough data available yet. Create at least 5 data sets to show statistics!")));
+                "Not enough data available yet.\nCreate at least 5 data sets to show statistics.",
+                textAlign: TextAlign.center,
+              )));
   }
 }
 
