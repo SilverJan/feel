@@ -147,7 +147,7 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
                         margin: EdgeInsets.symmetric(horizontal: 15),
                         child: Column(children: [
                           ListTile(
-                            tileColor: Theme.of(context).secondaryHeaderColor,
+                            //tileColor: Theme.of(context).secondaryHeaderColor,
                             title: Text(
                               "Submit a new data set",
                               style:
