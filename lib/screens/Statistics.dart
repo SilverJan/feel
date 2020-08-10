@@ -73,8 +73,6 @@ class _RawStatisticsState extends State<Statistics> {
         // animatedIconTheme: IconThemeData(size: 22.0),
         child: Icon(Icons.filter_list),
         backgroundColor: Colors.amber[800],
-        // onOpen: () => print('OPENING DIAL'),
-        // onClose: () => print('DIAL CLOSED'),
         visible: dialVisible,
         overlayOpacity: 0,
         closeManually: true,
@@ -86,45 +84,56 @@ class _RawStatisticsState extends State<Statistics> {
   Widget build(BuildContext context) {
     dataSetItemProperties = Provider.of<DataSetItemProperties>(context);
     final _dataSets = Provider.of<DataSetModel>(context);
+    double width = MediaQuery.of(context).size.width;
+
+    List<Widget> statisticWidgets = [
+      StatisticsCard(
+        title: "Average Health Values",
+        chart: AverageChart(),
+        // rightInfo: "30d",
+        subTitle:
+            "Showing the average rating for the different properties that were analyzed",
+      ),
+      StatisticsCard(
+        title: "Impact of Activities on Health",
+        chart: ActivityCorrelationChart(),
+        subTitle:
+            "Here you can see which activity had which good/bad impact on your health",
+        height: 400,
+      ),
+      StatisticsCard(
+        title: "Historical Data (even)",
+        chart: EvenLineChart(),
+        subTitle: "This chart shows the historical data of all values",
+      ),
+      StatisticsCard(
+        title: "Historical Data (time-based)",
+        chart: HistoricalLineChart(),
+        subTitle: "This chart shows the historical data of all values",
+      ),
+      StatisticsCard(
+        title: "Today's Data",
+        chart: TodayLineChart(),
+        subTitle: "This chart shows today's data",
+      )
+    ];
 
     return Scaffold(
         floatingActionButton: buildSpeedDial(),
         body: _dataSets.dataSets.length > 4
             ? Column(children: [
                 Expanded(
-                    child: ListView(children: [
-                  StatisticsCard(
-                    title: "Average Health Values",
-                    chart: AverageChart(),
-                    // rightInfo: "30d",
-                    subTitle:
-                        "Showing the average rating for the different properties that were analyzed",
-                  ),
-                  StatisticsCard(
-                    title: "Impact Activity <-> Overall Health",
-                    chart: ActivityCorrelationChart(),
-                    subTitle:
-                        "Here you can see which activity had which impact on your overall health",
-                    height: 330,
-                  ),
-                  StatisticsCard(
-                    title: "Historical Data (even)",
-                    chart: EvenLineChart(),
-                    subTitle:
-                        "This chart shows the historical data of all values",
-                  ),
-                  StatisticsCard(
-                    title: "Historical Data (time-based)",
-                    chart: HistoricalLineChart(),
-                    subTitle:
-                        "This chart shows the historical data of all values",
-                  ),
-                  StatisticsCard(
-                    title: "Today's Data",
-                    chart: TodayLineChart(),
-                    subTitle: "This chart shows today's data",
-                  )
-                ]))
+                    child: width > 700
+                        ? GridView.count(
+                            crossAxisCount: 2,
+                            primary: false,
+                            padding: const EdgeInsets.all(0),
+                            crossAxisSpacing: 0,
+                            mainAxisSpacing: 0,
+                            children: statisticWidgets)
+                        : ListView(
+                            children: statisticWidgets,
+                          ))
               ])
             : Center(
                 child: Text(
@@ -162,7 +171,7 @@ class StatisticsCard extends StatelessWidget {
             child: Column(children: [
               Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   child: Column(
                     children: [
                       Row(
@@ -187,8 +196,9 @@ class StatisticsCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                   )),
               Flexible(
-                  child:
-                      Container(margin: EdgeInsets.all(10), child: this.chart))
+                  child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      child: this.chart))
             ])));
   }
 }
