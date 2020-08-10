@@ -167,7 +167,7 @@ class StatisticsCard extends StatelessWidget {
         height: height,
         child: Card(
             // color: Colors.white,
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Column(children: [
               Container(
                   alignment: Alignment.centerLeft,
