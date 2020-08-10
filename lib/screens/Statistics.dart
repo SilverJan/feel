@@ -128,7 +128,7 @@ class _RawStatisticsState extends State<Statistics> {
               ])
             : Center(
                 child: Text(
-                "Not enough data available yet.\nCreate at least 5 data sets to show statistics.",
+                "Not enough data sets available yet.\nCreate at least 5 data sets to show statistics.",
                 textAlign: TextAlign.center,
               )));
   }
