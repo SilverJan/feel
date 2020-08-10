@@ -10,10 +10,21 @@ class DataSetItem extends Comparable {
   double heartbeat;
   double breathingIssues;
   double stress;
+  double tiredness;
+  String freeText;
   List<String> activities;
 
-  DataSetItem(this.time, this.overall, this.coughing, this.dizziness,
-      this.heartbeat, this.breathingIssues, this.stress, this.activities)
+  DataSetItem(
+      this.time,
+      this.overall,
+      this.coughing,
+      this.dizziness,
+      this.heartbeat,
+      this.breathingIssues,
+      this.stress,
+      this.tiredness,
+      this.freeText,
+      this.activities)
       : id = Uuid().v1();
 
   @override
@@ -35,7 +46,9 @@ class DataSetItem extends Comparable {
         dizziness = double.tryParse(json['dizziness'].toString()),
         heartbeat = double.tryParse(json['heartbeat'].toString()),
         breathingIssues = double.tryParse(json['breathingIssues'].toString()),
-        stress = double.tryParse(json['stress'].toString()) {
+        stress = double.tryParse(json['stress'].toString()),
+        tiredness = double.tryParse(json['tiredness'].toString()),
+        freeText = json['freeText'].toString() {
     activities = List<String>.from(json['activities']);
     // activities = List.castFrom<dynamic, String>(json['activities']);
   }
@@ -49,13 +62,16 @@ class DataSetItem extends Comparable {
         'heartbeat': heartbeat,
         'breathingIssues': breathingIssues,
         'stress': stress,
+        'tiredness': tiredness,
+        'freeText': freeText,
         'activities': activities
       };
 
   @override
   String toString() {
     return """Overall: $overall 
-Coughing: $coughing | Dizziness: $dizziness | Heartbeat: $heartbeat | Breathing issues: $breathingIssues | Stress: $stress
+Coughing: $coughing | Dizziness: $dizziness | Heartbeat: $heartbeat | Breathing issues: $breathingIssues | Stress: $stress | Tiredness: $tiredness
+Optional Text: $freeText
 Activities: $activities""";
   }
 }
@@ -67,7 +83,7 @@ class DataSetItemProperties {
   DataSetItemProperties() {
     allProperties = [
       DataSetItemProperty(
-          "overall", "Overall", MaterialPalette.blue.shadeDefault),
+          "overall", "Overall health", MaterialPalette.blue.shadeDefault),
       DataSetItemProperty(
           "coughing", "Coughing", MaterialPalette.red.shadeDefault),
       DataSetItemProperty(
@@ -78,6 +94,8 @@ class DataSetItemProperties {
           MaterialPalette.yellow.shadeDefault.darker.darker),
       DataSetItemProperty(
           "stress", "Stress level", MaterialPalette.pink.shadeDefault),
+      DataSetItemProperty(
+          "tiredness", "Tiredness level", MaterialPalette.indigo.shadeDefault),
     ];
   }
 

@@ -13,18 +13,86 @@ class ActivityCorrelationChart extends StatefulWidget {
 }
 
 class _ActivityCorrelationChartState extends State<ActivityCorrelationChart> {
+  DataSetModel _dataSets;
+  DataSetItemProperties dataSetItemProperties;
+  DataSetItemProperty selectedProperty;
+
   @override
   Widget build(BuildContext context) {
-    final _dataSets = Provider.of<DataSetModel>(context);
+    _dataSets = Provider.of<DataSetModel>(context);
+    final dataSetItemProperties = Provider.of<DataSetItemProperties>(context);
+    final _formKey = GlobalKey<FormState>();
 
+    // Set initial selected property to first (overall)
+    if (selectedProperty == null) {
+      selectedProperty = dataSetItemProperties.allProperties[0];
+    }
+
+    // Create dropdown menu items for selection
+    List<DropdownMenuItem<DataSetItemProperty>> dropdownMenuItems = [];
+    dataSetItemProperties.allProperties.forEach((element) {
+      dropdownMenuItems.add(DropdownMenuItem(
+        child: Text(element.niceName),
+        value: element,
+      ));
+    });
+
+    // Get strings which will be shown in view later on
+    List<String> correlationsStrings = getCorrelationStrings(selectedProperty);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+            child: Form(
+              key: _formKey,
+              child: DropdownButtonFormField<DataSetItemProperty>(
+                value: selectedProperty,
+                onChanged: (value) {
+                  setState(() {
+                    selectedProperty = value;
+                  });
+                },
+                items: dropdownMenuItems,
+                decoration: const InputDecoration(
+                    labelText: "Choose property to get correlation to"),
+              ),
+            )),
+        Divider(),
+        ListTile(
+          title: Text(
+              "Activities where '${selectedProperty.niceName}' was rated bad"),
+          subtitle: Text(correlationsStrings[0]),
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+        ),
+        Divider(),
+        ListTile(
+          title: Text(
+              "Activities where '${selectedProperty.niceName}' was rated good"),
+          subtitle: Text(correlationsStrings[1]),
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+        )
+      ],
+    );
+  }
+
+  List<String> getCorrelationStrings(DataSetItemProperty property) {
     // Step 1) Get dataSetItems with low / high overall values
     List<DataSetItem> _dataSetsWithHighOverall = _dataSets.dataSets
-        .where((DataSetItem item) =>
-            item != null && item.overall >= 3.667 ? true : false)
+        .where((DataSetItem item) => item.toJson()[property.name] != null &&
+                double.tryParse(item.toJson()[property.name].toString()) >=
+                    3.667
+            ? true
+            : false)
         .toList();
 
     List<DataSetItem> _dataSetsWithLowOverall = _dataSets.dataSets
-        .where((DataSetItem item) => item.overall < 1.667 ? true : false)
+        .where((DataSetItem item) => item.toJson()[property.name] != null &&
+                double.tryParse(item.toJson()[property.name].toString()) < 1.667
+            ? true
+            : false)
         .toList();
 
     // Step 2) Get all activities for selected dataSetItems
@@ -69,37 +137,31 @@ class _ActivityCorrelationChartState extends State<ActivityCorrelationChart> {
 
     // Step 5) Create string to be printed
     String highMapString = "";
+    if (highOverallActivitiesMap.length == 0) {
+      highMapString = "n.a.";
+    }
     for (var i = 0; i < highOverallActivitiesMap.length; i++) {
       highMapString +=
           "${i + 1}) ${highOverallActivitiesMap.keys.toList()[i]} (${highOverallActivitiesMap.values.toList()[i]} times)\n";
+      // stop at top 3
       if (i == 2) {
         break;
       }
     }
 
     String lowMapString = "";
+    if (lowOverallActivitiesMap.length == 0) {
+      lowMapString = "n.a.";
+    }
     for (var i = 0; i < lowOverallActivitiesMap.length; i++) {
       lowMapString +=
           "${i + 1}) ${lowOverallActivitiesMap.keys.toList()[i]} (${lowOverallActivitiesMap.values.toList()[i]} times)\n";
+      // stop at top 3
       if (i == 2) {
         break;
       }
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ListTile(
-          title: Text("Activities while having bad overall health"),
-          subtitle: Text(highMapString),
-        ),
-        Divider(),
-        ListTile(
-          title: Text("Activities while having good overall health"),
-          subtitle: Text(lowMapString),
-        )
-      ],
-    );
+    return [highMapString, lowMapString];
   }
 }
