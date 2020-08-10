@@ -14,7 +14,7 @@ class FileAccess {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/.datasets.json');
+    return File('$path/datasets.json');
   }
 
   Future<List<DataSetItem>> readDataSets() async {

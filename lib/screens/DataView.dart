@@ -74,8 +74,6 @@ class _DataViewState extends State<DataView> {
                 ))))
         : Container(
             color: _theme.scaffoldBackgroundColor,
-            child: Center(
-                child: Text(
-                    "No data sets available yet. Create your first one now!")));
+            child: Center(child: Text("No data sets available yet.")));
   }
 }
