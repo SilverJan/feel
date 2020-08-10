@@ -13,10 +13,12 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
   final _formKey = GlobalKey<FormState>();
   double _overallValue = 0;
   double _dizzinessValue = 0;
-  double _headacheValue = 0;
+  double _coughingValue = 0;
   double _heartbeatValue = 0;
   double _breathingIssuesValue = 0;
   double _stressValue = 0;
+  double _tirednessValue = 0;
+  TextEditingController _freeTextInput = new TextEditingController();
 
   final List<String> _activities = [
     'Gym',
@@ -34,14 +36,18 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
   ];
   List<bool> _activitySelected;
 
-  double _sliderMin = 0;
-  double _sliderMax = 5;
-  int _sliderDivisions = 10;
-
   @override
   void initState() {
     resetSelectedActivities();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    _freeTextInput.dispose();
+    super.dispose();
   }
 
   /// Generate list dynamically depending on amount of activities available
@@ -54,10 +60,12 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
     setState(() {
       _overallValue = 0;
       _dizzinessValue = 0;
-      _headacheValue = 0;
+      _coughingValue = 0;
       _heartbeatValue = 0;
       _breathingIssuesValue = 0;
       _stressValue = 0;
+      _tirednessValue = 0;
+      _freeTextInput.clear();
       resetSelectedActivities();
     });
   }
@@ -89,13 +97,6 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
     return selectedActivities;
   }
 
-  SliderThemeData getSliderThemeData(double value) {
-    return SliderThemeData(
-        activeTrackColor: (value < 1.66)
-            ? Colors.green
-            : (value < 3.33) ? Colors.orange : Colors.red);
-  }
-
   @override
   Widget build(BuildContext context) {
     final _dataSets = Provider.of<DataSetModel>(context);
@@ -110,11 +111,13 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
               _dataSets.addDataSet(new DataSetItem(
                   DateTime.now(),
                   _overallValue,
-                  _headacheValue,
+                  _coughingValue,
                   _dizzinessValue,
-                  _headacheValue,
+                  _coughingValue,
                   _breathingIssuesValue,
                   _stressValue,
+                  _tirednessValue,
+                  _freeTextInput.value.text,
                   _getSelectedActivities()));
               resetForm();
               Scaffold.of(context).showSnackBar(SnackBar(
@@ -128,26 +131,12 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
         body: Center(
             child: SingleChildScrollView(
                 padding: EdgeInsets.only(top: 30),
-                child:
-                    // Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-                    //     Widget>[
-                    // Card(
-                    //   margin: EdgeInsets.symmetric(horizontal: 15),
-                    //   child: ListTile(
-                    //     tileColor: Theme.of(context).secondaryHeaderColor,
-                    //     title: Text(
-                    //       "Submit a new data set",
-                    //       style: TextStyle(color: Colors.white, fontSize: 20),
-                    //     ),
-                    //     subtitle: Text(
-                    //         "Try to fill in the questions based on the past 30-60 minutes."),
-                    //   ),
-                    // ),
-                    Card(
-                        margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(children: [
-                          ListTile(
-                            //tileColor: Theme.of(context).secondaryHeaderColor,
+                child: Card(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(children: [
+                      Container(
+                          color: Theme.of(context).secondaryHeaderColor,
+                          child: ListTile(
                             title: Text(
                               "Submit a new data set",
                               style:
@@ -155,177 +144,172 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
                             ),
                             subtitle: Text(
                                 "Try to fill in the questions based on the past 30-60 minutes."),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
+                          )),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                ),
+                                Text(
+                                  "Which activities have you done in the past minutes?",
+                                ),
+                                Wrap(children: [
+                                  for (FilterChip chip in _buildChips())
                                     Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                    ),
-                                    Text(
-                                      "Which activities have you done in the past minutes?",
-                                    ),
-                                    Wrap(children: [
-                                      for (FilterChip chip in _buildChips())
-                                        Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            child: chip)
-                                    ]),
-                                    // ListTile(
-                                    //   tileColor: Theme.of(context).primaryColor,
-                                    //   title: Text(
-                                    //     "Health check",
-                                    //     style: TextStyle(
-                                    //         color: Colors.white, fontSize: 17),
-                                    //   ),
-                                    //   subtitle: Text(
-                                    //       "Select a value for the individual question (0 = Not applicable; 5 = Very much)"),
-                                    // ),
-                                    // Padding(
-                                    //   padding: EdgeInsets.symmetric(vertical: 10),
-                                    // ),
-                                    // Divider(),
-                                    // Text(
-                                    //   "Select a value for the individual question.\n\n0 = Not applicable; 5 = Very much",
-                                    //   textAlign: TextAlign.center,
-                                    // ),
-                                    Divider(),
-                                    Text(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        child: chip)
+                                ]),
+                                FormElement(
+                                  value: _overallValue,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _overallValue = value;
+                                    });
+                                  },
+                                  text:
                                       "How good is your overall health situation?",
-                                    ),
-                                    SliderTheme(
-                                        data: getSliderThemeData(_overallValue),
-                                        child: Slider(
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _overallValue = value;
-                                              });
-                                            },
-                                            min: _sliderMin,
-                                            max: _sliderMax,
-                                            divisions: _sliderDivisions,
-                                            value: _overallValue,
-                                            label: _overallValue.toString())),
-                                    Divider(),
-                                    Text(
-                                      "Do you feel dizzy?",
-                                    ),
-                                    SliderTheme(
-                                        data:
-                                            getSliderThemeData(_dizzinessValue),
-                                        child: Slider(
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _dizzinessValue = value;
-                                              });
-                                            },
-                                            min: _sliderMin,
-                                            max: _sliderMax,
-                                            divisions: _sliderDivisions,
-                                            value: _dizzinessValue,
-                                            label: _dizzinessValue.toString())),
-                                    Divider(),
-                                    Text(
-                                      "Do you have to cough / feel need to cough?",
-                                    ),
-                                    SliderTheme(
-                                        data:
-                                            getSliderThemeData(_headacheValue),
-                                        child: Slider(
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _headacheValue = value;
-                                              });
-                                            },
-                                            min: _sliderMin,
-                                            max: _sliderMax,
-                                            divisions: _sliderDivisions,
-                                            value: _headacheValue,
-                                            label: _headacheValue.toString())),
-                                    Divider(),
-                                    Text(
-                                      "Do you have a fast heartbeat?",
-                                    ),
-                                    SliderTheme(
-                                        data:
-                                            getSliderThemeData(_heartbeatValue),
-                                        child: Slider(
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _heartbeatValue = value;
-                                              });
-                                            },
-                                            min: _sliderMin,
-                                            max: _sliderMax,
-                                            divisions: _sliderDivisions,
-                                            value: _heartbeatValue,
-                                            label: _heartbeatValue.toString())),
-                                    Divider(),
-                                    Text(
-                                      "Do you have issues breathing?",
-                                    ),
-                                    SliderTheme(
-                                        data: getSliderThemeData(
-                                            _breathingIssuesValue),
-                                        child: Slider(
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _breathingIssuesValue = value;
-                                              });
-                                            },
-                                            min: _sliderMin,
-                                            max: _sliderMax,
-                                            divisions: _sliderDivisions,
-                                            value: _breathingIssuesValue,
-                                            label: _breathingIssuesValue
-                                                .toString())),
-                                    Divider(),
-                                    Text(
-                                      "Do you feel stressed?",
-                                    ),
-                                    SliderTheme(
-                                        data: getSliderThemeData(_stressValue),
-                                        child: Slider(
-                                            onChanged: (value) {
-                                              setState(() {
-                                                _stressValue = value;
-                                              });
-                                            },
-                                            min: _sliderMin,
-                                            max: _sliderMax,
-                                            divisions: _sliderDivisions,
-                                            value: _stressValue,
-                                            label: _stressValue.toString())),
-                                    // Divider(),
-                                    // RaisedButton(
-                                    //   // color: _theme.buttonTheme.colorScheme.primary,
-                                    //   child: Text("Submit"),
-                                    //   onPressed: () {
-                                    //     _dataSets.addDataSet(new DataSetItem(
-                                    //         DateTime.now(),
-                                    //         _overallValue,
-                                    //         _headacheValue,
-                                    //         _dizzinessValue,
-                                    //         _headacheValue,
-                                    //         _breathingIssuesValue,
-                                    //         _getSelectedActivities()));
-                                    //     resetForm();
-                                    //     Scaffold.of(context).showSnackBar(SnackBar(
-                                    //       content: Text("Data set successfully added!"),
-                                    //       duration: Duration(milliseconds: 1000),
-                                    //     ));
-                                    //   },
-                                    // )
-                                  ]),
-                            ),
-                          )
-                        ])))));
+                                ),
+                                FormElement(
+                                  value: _dizzinessValue,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _dizzinessValue = value;
+                                    });
+                                  },
+                                  text: "Do you feel dizzy?",
+                                ),
+                                FormElement(
+                                    value: _coughingValue,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _coughingValue = value;
+                                      });
+                                    },
+                                    text:
+                                        "Do you have to cough / feel need to cough?"),
+                                FormElement(
+                                    value: _heartbeatValue,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _heartbeatValue = value;
+                                      });
+                                    },
+                                    text: "Do you have a fast heartbeat?"),
+                                FormElement(
+                                    value: _breathingIssuesValue,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _breathingIssuesValue = value;
+                                      });
+                                    },
+                                    text: "Do you have issues breathing?"),
+                                FormElement(
+                                    value: _stressValue,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _stressValue = value;
+                                      });
+                                    },
+                                    text: "Do you feel stressed?"),
+                                FormElement(
+                                    value: _tirednessValue,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _tirednessValue = value;
+                                      });
+                                    },
+                                    text: "Do you feel tired?"),
+                                Divider(),
+                                Text(
+                                    "Enter an optional description of your current health state."),
+                                TextFormField(
+                                  controller: _freeTextInput,
+                                  // decoration: InputDecoration(
+                                  //     labelText: 'Enter a freetext'),
+                                )
+                                // Divider(),
+                                // RaisedButton(
+                                //   // color: _theme.buttonTheme.colorScheme.primary,
+                                //   child: Text("Submit"),
+                                //   onPressed: () {
+                                //     _dataSets.addDataSet(new DataSetItem(
+                                //         DateTime.now(),
+                                //         _overallValue,
+                                //         _headacheValue,
+                                //         _dizzinessValue,
+                                //         _headacheValue,
+                                //         _breathingIssuesValue,
+                                //         _getSelectedActivities()));
+                                //     resetForm();
+                                //     Scaffold.of(context).showSnackBar(SnackBar(
+                                //       content: Text("Data set successfully added!"),
+                                //       duration: Duration(milliseconds: 1000),
+                                //     ));
+                                //   },
+                                // )
+                              ]),
+                        ),
+                      )
+                    ])))));
+  }
+}
+
+class FormElement extends StatelessWidget {
+  const FormElement({
+    Key key,
+    @required this.value,
+    @required this.onChanged,
+    @required this.text,
+    this.leadingWidget = const Icon(Icons.mood),
+    this.trailingWidget = const Icon(Icons.mood_bad),
+  }) : super(key: key);
+
+  final double value;
+  final Function onChanged;
+  final String text;
+  final Widget leadingWidget;
+  final Widget trailingWidget;
+
+  final double _sliderMin = 0;
+  final double _sliderMax = 5;
+  final int _sliderDivisions = 10;
+
+  SliderThemeData getSliderThemeData(double value) {
+    return SliderThemeData(
+        activeTrackColor: (value < 1.66)
+            ? Colors.green
+            : (value < 3.33) ? Colors.orange : Colors.red);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Divider(),
+          Text(text),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            leadingWidget == null ? Container() : leadingWidget,
+            Expanded(
+                child: SliderTheme(
+                    data: getSliderThemeData(value),
+                    child: Slider(
+                        // TODO: Try to call setState() in here
+                        onChanged: onChanged,
+                        min: _sliderMin,
+                        max: _sliderMax,
+                        divisions: _sliderDivisions,
+                        value: value,
+                        label: value.toString()))),
+            trailingWidget == null ? Container() : trailingWidget,
+          ]),
+        ]);
   }
 }
