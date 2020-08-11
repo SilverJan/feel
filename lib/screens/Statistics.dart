@@ -197,7 +197,7 @@ class StatisticsCard extends StatelessWidget {
                   )),
               Flexible(
                   child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                       child: this.chart))
             ])));
   }

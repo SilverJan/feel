@@ -78,7 +78,7 @@ class _HistoricalLineChartState extends State<HistoricalLineChart> {
       layoutConfig: new charts.LayoutConfig(
           leftMarginSpec: new charts.MarginSpec.fixedPixel(60),
           topMarginSpec: new charts.MarginSpec.fixedPixel(20),
-          rightMarginSpec: new charts.MarginSpec.fixedPixel(60),
+          rightMarginSpec: new charts.MarginSpec.fixedPixel(20),
           bottomMarginSpec: new charts.MarginSpec.fixedPixel(20)),
       behaviors: [
         // getLegend(context),

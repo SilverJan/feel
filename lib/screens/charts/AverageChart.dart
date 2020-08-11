@@ -81,7 +81,10 @@ class _AverageChartState extends State<AverageChart> {
       //           charts.OutsideJustification.middleDrawArea),
       // ],
     );
-    return contentChart;
+    return Container(
+      child: contentChart,
+      margin: EdgeInsets.only(bottom: 0, right: 20),
+    );
   }
 }
 

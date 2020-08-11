@@ -135,6 +135,7 @@ class _AddDataSetWidgetState extends State<AddDataSetWidget> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: Column(children: [
                       Container(
+                          margin: EdgeInsets.all(10),
                           color: Theme.of(context).secondaryHeaderColor,
                           child: ListTile(
                             title: Text(
