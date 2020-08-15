@@ -14,36 +14,8 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		C6D447A824E78D070070C686 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6D447A624E78D070070C686 /* Interface.storyboard */; };
-		C6D447AA24E78D090070C686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D447A924E78D090070C686 /* Assets.xcassets */; };
-		C6D447B124E78D090070C686 /* feel-watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C6D447B024E78D090070C686 /* feel-watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C6D447B624E78D090070C686 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D447B524E78D090070C686 /* ContentView.swift */; };
-		C6D447B824E78D090070C686 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D447B724E78D090070C686 /* HostingController.swift */; };
-		C6D447BA24E78D090070C686 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D447B924E78D090070C686 /* ExtensionDelegate.swift */; };
-		C6D447BC24E78D090070C686 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D447BB24E78D090070C686 /* NotificationController.swift */; };
-		C6D447BE24E78D090070C686 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D447BD24E78D090070C686 /* NotificationView.swift */; };
-		C6D447C024E78D0A0070C686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D447BF24E78D0A0070C686 /* Assets.xcassets */; };
-		C6D447C324E78D0A0070C686 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D447C224E78D0A0070C686 /* Preview Assets.xcassets */; };
-		C6D447C824E78D0A0070C686 /* feel-watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C6D447A424E78D070070C686 /* feel-watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C6E2070224DFE93700E92C9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C6E2070124DFE93700E92C9E /* icon.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		C6D447B224E78D090070C686 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C6D447AF24E78D090070C686;
-			remoteInfo = "feel-watch Extension";
-		};
-		C6D447C624E78D0A0070C686 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C6D447A324E78D070070C686;
-			remoteInfo = "feel-watch";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9705A1C41CF9048500538489 /* Embed Frameworks */ = {
@@ -54,28 +26,6 @@
 			files = (
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6D447C924E78D0A0070C686 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				C6D447C824E78D0A0070C686 /* feel-watch.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6D447CD24E78D0A0070C686 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				C6D447B124E78D090070C686 /* feel-watch Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -97,20 +47,6 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C6D447A424E78D070070C686 /* feel-watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "feel-watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6D447A724E78D070070C686 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		C6D447A924E78D090070C686 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C6D447AB24E78D090070C686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C6D447B024E78D090070C686 /* feel-watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "feel-watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6D447B524E78D090070C686 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C6D447B724E78D090070C686 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
-		C6D447B924E78D090070C686 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		C6D447BB24E78D090070C686 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		C6D447BD24E78D090070C686 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		C6D447BF24E78D0A0070C686 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C6D447C224E78D0A0070C686 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C6D447C424E78D0A0070C686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C6D447C524E78D0A0070C686 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		C6E2070124DFE93700E92C9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../assets/icon/icon.png; sourceTree = "<group>"; };
 		F4D22F3906E60E292719F81B /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,13 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				69E96E12FB1242B6F444ED23 /* Pods_Runner.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6D447AD24E78D090070C686 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,8 +87,6 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
-				C6D447A524E78D070070C686 /* feel-watch */,
-				C6D447B424E78D090070C686 /* feel-watch Extension */,
 				97C146EF1CF9000F007C117D /* Products */,
 				C0B5C26126552449C7ECA07F /* Pods */,
 				54695AF63DA50AACB2FCE3B9 /* Frameworks */,
@@ -170,8 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
-				C6D447A424E78D070070C686 /* feel-watch.app */,
-				C6D447B024E78D090070C686 /* feel-watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,40 +127,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C6D447A524E78D070070C686 /* feel-watch */ = {
-			isa = PBXGroup;
-			children = (
-				C6D447A624E78D070070C686 /* Interface.storyboard */,
-				C6D447A924E78D090070C686 /* Assets.xcassets */,
-				C6D447AB24E78D090070C686 /* Info.plist */,
-			);
-			path = "feel-watch";
-			sourceTree = "<group>";
-		};
-		C6D447B424E78D090070C686 /* feel-watch Extension */ = {
-			isa = PBXGroup;
-			children = (
-				C6D447B524E78D090070C686 /* ContentView.swift */,
-				C6D447B724E78D090070C686 /* HostingController.swift */,
-				C6D447B924E78D090070C686 /* ExtensionDelegate.swift */,
-				C6D447BB24E78D090070C686 /* NotificationController.swift */,
-				C6D447BD24E78D090070C686 /* NotificationView.swift */,
-				C6D447BF24E78D0A0070C686 /* Assets.xcassets */,
-				C6D447C424E78D0A0070C686 /* Info.plist */,
-				C6D447C524E78D0A0070C686 /* PushNotificationPayload.apns */,
-				C6D447C124E78D0A0070C686 /* Preview Content */,
-			);
-			path = "feel-watch Extension";
-			sourceTree = "<group>";
-		};
-		C6D447C124E78D0A0070C686 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				C6D447C224E78D0A0070C686 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -251,51 +142,15 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				DFCF9A7B69699AE6025112E1 /* [CP] Embed Pods Frameworks */,
-				C6D447C924E78D0A0070C686 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C6D447C724E78D0A0070C686 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
-		};
-		C6D447A324E78D070070C686 /* feel-watch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C6D447D224E78D0A0070C686 /* Build configuration list for PBXNativeTarget "feel-watch" */;
-			buildPhases = (
-				C6D447A224E78D070070C686 /* Resources */,
-				C6D447CD24E78D0A0070C686 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C6D447B324E78D090070C686 /* PBXTargetDependency */,
-			);
-			name = "feel-watch";
-			productName = "feel-watch";
-			productReference = C6D447A424E78D070070C686 /* feel-watch.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		C6D447AF24E78D090070C686 /* feel-watch Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C6D447D124E78D0A0070C686 /* Build configuration list for PBXNativeTarget "feel-watch Extension" */;
-			buildPhases = (
-				C6D447AC24E78D090070C686 /* Sources */,
-				C6D447AD24E78D090070C686 /* Frameworks */,
-				C6D447AE24E78D090070C686 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "feel-watch Extension";
-			productName = "feel-watch Extension";
-			productReference = C6D447B024E78D090070C686 /* feel-watch Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -303,19 +158,12 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
-					};
-					C6D447A324E78D070070C686 = {
-						CreatedOnToolsVersion = 11.6;
-					};
-					C6D447AF24E78D090070C686 = {
-						CreatedOnToolsVersion = 11.6;
 					};
 				};
 			};
@@ -333,8 +181,6 @@
 			projectRoot = "";
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
-				C6D447A324E78D070070C686 /* feel-watch */,
-				C6D447AF24E78D090070C686 /* feel-watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -349,24 +195,6 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6D447A224E78D070070C686 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C6D447AA24E78D090070C686 /* Assets.xcassets in Resources */,
-				C6D447A824E78D070070C686 /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6D447AE24E78D090070C686 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C6D447C324E78D0A0070C686 /* Preview Assets.xcassets in Resources */,
-				C6D447C024E78D0A0070C686 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,32 +280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6D447AC24E78D090070C686 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C6D447B824E78D090070C686 /* HostingController.swift in Sources */,
-				C6D447B624E78D090070C686 /* ContentView.swift in Sources */,
-				C6D447BC24E78D090070C686 /* NotificationController.swift in Sources */,
-				C6D447BA24E78D090070C686 /* ExtensionDelegate.swift in Sources */,
-				C6D447BE24E78D090070C686 /* NotificationView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C6D447B324E78D090070C686 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C6D447AF24E78D090070C686 /* feel-watch Extension */;
-			targetProxy = C6D447B224E78D090070C686 /* PBXContainerItemProxy */;
-		};
-		C6D447C724E78D0A0070C686 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C6D447A324E78D070070C686 /* feel-watch */;
-			targetProxy = C6D447C624E78D0A0070C686 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		97C146FA1CF9000F007C117D /* Main.storyboard */ = {
@@ -494,14 +297,6 @@
 				97C147001CF9000F007C117D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		C6D447A624E78D070070C686 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C6D447A724E78D070070C686 /* Base */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -755,183 +550,6 @@
 			};
 			name = Release;
 		};
-		C6D447CA24E78D0A0070C686 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9U6G8W8WQY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = feel_watch_Extension;
-				INFOPLIST_FILE = "feel-watch/Info.plist";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.silverjan.feel.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
-			};
-			name = Debug;
-		};
-		C6D447CB24E78D0A0070C686 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9U6G8W8WQY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = feel_watch_Extension;
-				INFOPLIST_FILE = "feel-watch/Info.plist";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.silverjan.feel.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
-			};
-			name = Release;
-		};
-		C6D447CC24E78D0A0070C686 /* Profile */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9U6G8W8WQY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				IBSC_MODULE = feel_watch_Extension;
-				INFOPLIST_FILE = "feel-watch/Info.plist";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.silverjan.feel.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
-			};
-			name = Profile;
-		};
-		C6D447CE24E78D0A0070C686 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"feel-watch Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 9U6G8W8WQY;
-				ENABLE_PREVIEWS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "feel-watch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.silverjan.feel.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
-			};
-			name = Debug;
-		};
-		C6D447CF24E78D0A0070C686 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"feel-watch Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 9U6G8W8WQY;
-				ENABLE_PREVIEWS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "feel-watch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.silverjan.feel.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
-			};
-			name = Release;
-		};
-		C6D447D024E78D0A0070C686 /* Profile */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"feel-watch Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 9U6G8W8WQY;
-				ENABLE_PREVIEWS = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "feel-watch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.silverjan.feel.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.2;
-			};
-			name = Profile;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -951,26 +569,6 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C6D447D124E78D0A0070C686 /* Build configuration list for PBXNativeTarget "feel-watch Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C6D447CE24E78D0A0070C686 /* Debug */,
-				C6D447CF24E78D0A0070C686 /* Release */,
-				C6D447D024E78D0A0070C686 /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C6D447D224E78D0A0070C686 /* Build configuration list for PBXNativeTarget "feel-watch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C6D447CA24E78D0A0070C686 /* Debug */,
-				C6D447CB24E78D0A0070C686 /* Release */,
-				C6D447CC24E78D0A0070C686 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
