@@ -34,8 +34,8 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       // appBar: AppBar(
       //   title: const Text('BottomNavigationBar Sample'),
       // ),
-      backgroundColor: Colors.black,
-      body: Center(
+      // backgroundColor: Colors.black,
+      body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
