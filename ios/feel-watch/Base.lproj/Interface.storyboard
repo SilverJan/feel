@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="16097.2" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="16012"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller contentMode="center" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="feel_watch" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="center" contentMode="center" layout="vertical" id="BbF-tT-ya1">
+                            <items>
+                                <imageView width="50" height="50" alignment="center" image="smiley" catalog="system" id="VSm-R8-ABJ">
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </imageView>
+                                <group width="1" height="62" alignment="left" layout="vertical" id="3ih-lR-CW4">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="Amount of data sets:" textAlignment="center" numberOfLines="2" id="GRC-fs-4R1" userLabel="label"/>
+                                        <label width="136" alignment="center" verticalAlignment="center" text="0" textAlignment="center" numberOfLines="2" id="IYR-Yt-Gkp" userLabel="label"/>
+                                    </items>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="label" destination="IYR-Yt-Gkp" id="RbI-xW-1Dh"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="183" y="70"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="smiley" catalog="system" width="128" height="121"/>
+    </resources>
+</document>
